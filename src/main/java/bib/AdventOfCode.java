@@ -9,7 +9,7 @@ import java.net.URISyntaxException;
 public class AdventOfCode {
 
     public static void main(String[] args) throws IOException, URISyntaxException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        solveDay(2);
+        solveDay(3);
     }
 
     private static void solveDay(int d) throws IOException, URISyntaxException, InvocationTargetException, InstantiationException, IllegalAccessException {

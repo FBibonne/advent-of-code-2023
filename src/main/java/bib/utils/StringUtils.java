@@ -1,5 +1,7 @@
 package bib.utils;
 
+import lombok.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -17,6 +19,10 @@ public class StringUtils {
             start = matcher.start() + 1;
         }
         return retour;
+    }
+
+    public static String[] toStringArray(@NonNull String string) {
+        return string.split("");
     }
 
 }

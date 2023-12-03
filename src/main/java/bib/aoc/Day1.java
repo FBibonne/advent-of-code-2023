@@ -26,7 +26,7 @@ public final class Day1 extends Puzzle{
 
 
     private static int toDigit(String digit) {
-        return Integer.valueOf(numbers.getOrDefault(digit, digit));
+        return Integer.parseInt(numbers.getOrDefault(digit, digit));
     }
 
     private Pair<String, String> findFirstAndLastDigit(String line) {
