@@ -12,7 +12,7 @@ class SchematicTest {
                 {"#","1"},
                 {".","@"}
         };
-        var schematic=new Schematic(matrice,2,2,null, null);
+        var schematic=new Schematic(matrice,null, null);
         assertTrue(schematic.isSymbol(0,0));
         assertFalse(schematic.isSymbol(0,1));
         assertTrue(schematic.isSymbol(1,1));

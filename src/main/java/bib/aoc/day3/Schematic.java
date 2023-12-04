@@ -1,17 +1,23 @@
 package bib.aoc.day3;
 
+import bib.utils.ColumnPosition;
+import bib.utils.ColumnSize;
+import bib.utils.LinePosition;
+import bib.utils.LineSize;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static bib.utils.Matrice.*;
 import static bib.utils.StringUtils.toStringArray;
 import static java.lang.Integer.max;
 import static java.lang.Integer.min;
 import static java.lang.Math.abs;
 
-public record Schematic(String[][] matrice, int nbLines, int nbColumns, List<PartNumberCandidate> partNumberCandidates, List<GearCandidate> gears) {
+public record Schematic(String[][] matrice, List<PartNumberCandidate> partNumberCandidates, List<GearCandidate> gears) {
 
     private static final Pattern symbolPattern=Pattern.compile("[^\\d\\.]");
 
@@ -22,16 +28,16 @@ public record Schematic(String[][] matrice, int nbLines, int nbColumns, List<Par
         var nbColumns = listOfLines.getFirst().length();
         List<GearCandidate> gearCandidates=new ArrayList<>(3*nbLines);
         List<PartNumberCandidate> partNumberCandidates = new ArrayList<>(10 * nbLines);
-        String[][] matrice = new String[nbColumns][nbLines];
+        var matrice = newMatriceWithDim(LineSize.of(nbColumns), ColumnSize.of(nbLines));
         for (String line : listOfLines) {
             gearCandidates.addAll(GearCandidate.of(line, lineNb));
-            matrice[lineNb] = toStringArray(line);
+            inMatrice(matrice).fillLine(lineNb).with(toStringArray(line));
             partNumberCandidates.addAll(PartNumberCandidate.of(line, lineNb));
             lineNb++;
         }
         ((ArrayList<?>) partNumberCandidates).trimToSize();
         ((ArrayList<?>) gearCandidates).trimToSize();
-        return new Schematic(matrice, nbLines, nbColumns, partNumberCandidates, gearCandidates);
+        return new Schematic(matrice, partNumberCandidates, gearCandidates);
     }
 
 
@@ -44,26 +50,25 @@ public record Schematic(String[][] matrice, int nbLines, int nbColumns, List<Par
 
     private boolean isPartNumber(PartNumberCandidate partNumberCandidate) {
         for (int c = partNumberCandidate.start(); c <= partNumberCandidate.end(); c++) {
-            if (isAdjacent(partNumberCandidate.lineNb(), c)) {
+            if (isPointAdjacentWithSymbol(partNumberCandidate.lineNb(), c)) {
                 return true;
             }
         }
         return false;
     }
 
-    private boolean isAdjacent(int line, int column) {
-        for (int i = max(0, line - 1); i <= min(line + 1, nbLines - 1); i++) {
-            for (int j = max(0, column - 1); j <= min(column + 1, nbColumns - 1); j++) {
-                if (isSymbol(i, j)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    private boolean isPointAdjacentWithSymbol(int line, int column) {
+        return findAdjacentPointsOf(matrice).at(LinePosition.of(line), ColumnPosition.of(column))
+                .streamValuesWithoutOrigin()
+                .anyMatch(this::isSymbol);
+    }
+
+    private boolean isSymbol(String symbol) {
+        return symbolPattern.matcher(symbol).matches();
     }
 
     boolean isSymbol(int i, int j) {
-        return symbolPattern.matcher(matrice[i][j]).matches();
+        return isSymbol(matrice[i][j]);
     }
 
     public IntStream gearRatios() {
