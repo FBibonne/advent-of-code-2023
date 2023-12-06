@@ -11,7 +11,14 @@ import java.net.URISyntaxException;
 public class AdventOfCode {
 
     public static void main(String[] args) throws IOException, URISyntaxException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        solveDay(5);
+        solveDay(6);
+
+    }
+
+    private static void testDay(int d, String s) throws InvocationTargetException, InstantiationException, IllegalAccessException {
+        Puzzle dayd=Puzzle.newInstance(d);
+        var result=dayd.test(s);
+        log.info(STR."Day \{d}\n\tPart 1 : \{result.first()}\n\tPart 2 : \{result.second()}");
     }
 
     private static void solveDay(int d) throws IOException, URISyntaxException, InvocationTargetException, InstantiationException, IllegalAccessException {
