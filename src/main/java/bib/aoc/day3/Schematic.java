@@ -14,7 +14,6 @@ import java.util.stream.Stream;
 import static bib.utils.Matrice.*;
 import static bib.utils.StringUtils.toStringArray;
 import static java.lang.Integer.max;
-import static java.lang.Integer.min;
 import static java.lang.Math.abs;
 
 public record Schematic(String[][] matrice, List<PartNumberCandidate> partNumberCandidates, List<GearCandidate> gears) {

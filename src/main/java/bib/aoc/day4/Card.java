@@ -32,7 +32,7 @@ public class Card implements Comparable<Card> {
         if(!matcher.matches()){
             log.error(STR."no match for \{line}");
             return null;
-        };
+        }
         var winningNumbers=toStream(matcher.group("winnings")).collect(Collectors.toSet());
         var yours=toStream(matcher.group("yours")).toList();
         var id=Integer.parseInt(matcher.group("id"));

@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 @Slf4j
 public record Range(long destinationStart, long sourceStart, long length, long exclusiveSourceEnd, long offset) {
 
-    private static Pattern rangePattern = Pattern.compile("(?<destinationStart>\\d+) (?<sourceStart>\\d+) (?<length>\\d+)");
+    private static final Pattern rangePattern = Pattern.compile("(?<destinationStart>\\d+) (?<sourceStart>\\d+) (?<length>\\d+)");
 
     public Range(long destinationStart, long start, long length) {
         this(destinationStart, start, length, start + length, destinationStart - start);
