@@ -1,6 +1,7 @@
 package bib.aoc;
 
 import bib.utils.Pair;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
 import java.util.Set;
@@ -8,6 +9,7 @@ import java.util.regex.Pattern;
 
 import static bib.utils.StringUtils.findAllWithOverLap;
 
+@Slf4j
 public final class Day1 extends Puzzle{
 
     private static final Set<String> digits = Set.of("0", "1", "2", "3", "4", "5", "6", "7", "8", "9");
@@ -31,7 +33,7 @@ public final class Day1 extends Puzzle{
 
     private Pair<String, String> findFirstAndLastDigit(String line) {
         var matches = findAllWithOverLap(line, ciffersAndLetters);
-        System.out.print(STR."\{line} -> \{matches} -> ");
+        log.debug(STR."\{line} -> \{matches} -> ");
         return new Pair<>(matches.getFirst(), matches.getLast());
     }
 
@@ -41,7 +43,7 @@ public final class Day1 extends Puzzle{
                 .filter(this::isDigit)
                 .mapToInt(Integer::valueOf)
                 .toArray();
-        System.out.println(findFirst(ints) * 10 + findLast(ints));
+        log.debug(String.valueOf(findFirst(ints) * 10 + findLast(ints)));
         return findFirst(ints) * 10 + findLast(ints);
     }
 

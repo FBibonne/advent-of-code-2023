@@ -8,14 +8,10 @@ class SchematicTest {
 
     @Test
     void isSymbol_test() {
-        String[][] matrice={
-                {"#","1"},
-                {".","@"}
-        };
-        var schematic=new Schematic(matrice,null, null);
-        assertTrue(schematic.isSymbol(0,0));
-        assertFalse(schematic.isSymbol(0,1));
-        assertTrue(schematic.isSymbol(1,1));
-        assertFalse(schematic.isSymbol(1,0));
+        var schematic=new Schematic(null,null, null);
+        assertTrue(schematic.isSymbol("#"));
+        assertFalse(schematic.isSymbol("1"));
+        assertTrue(schematic.isSymbol("@"));
+        assertFalse(schematic.isSymbol("."));
     }
 }

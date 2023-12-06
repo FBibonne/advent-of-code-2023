@@ -63,12 +63,8 @@ public record Schematic(String[][] matrice, List<PartNumberCandidate> partNumber
                 .anyMatch(this::isSymbol);
     }
 
-    private boolean isSymbol(String symbol) {
+    boolean isSymbol(String symbol) {
         return symbolPattern.matcher(symbol).matches();
-    }
-
-    boolean isSymbol(int i, int j) {
-        return isSymbol(matrice[i][j]);
     }
 
     public IntStream gearRatios() {

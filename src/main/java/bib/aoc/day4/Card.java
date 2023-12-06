@@ -3,6 +3,7 @@ package bib.aoc.day4;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,16 +15,14 @@ import java.util.stream.Stream;
 import static java.lang.Math.pow;
 import static java.util.function.Predicate.not;
 
+@Getter
 @RequiredArgsConstructor
+@Slf4j
 public class Card implements Comparable<Card> {
 
-    @Getter
     private final Set<Integer> winningNumbers;
-    @Getter
     private final List<Integer> numbersYouHave;
-    @Getter
     private final int id;
-    @Getter
     private int nbInstances=1;
 
     private static final Pattern pattern= Pattern.compile("Card +(?<id>\\d+):(?<winnings>[ \\d]*)\\|(?<yours>[ \\d]*)");
@@ -31,7 +30,7 @@ public class Card implements Comparable<Card> {
     public static Card of(@NonNull String line) {
         var matcher=pattern.matcher(line);
         if(!matcher.matches()){
-            System.out.println(STR."no match for \{line}");
+            log.error(STR."no match for \{line}");
             return null;
         };
         var winningNumbers=toStream(matcher.group("winnings")).collect(Collectors.toSet());
