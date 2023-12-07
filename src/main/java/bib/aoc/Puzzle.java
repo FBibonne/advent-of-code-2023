@@ -37,8 +37,4 @@ public sealed abstract class Puzzle permits Day1, Day2, Day3, Day4, Day5, Day6 {
         return solve(new PathToFile(STR."input\{d}.txt"));
     }
 
-    public Pair<String, String> test(String input){
-        return new Pair<>(part1().solve(input.lines()), part2().solve(input.lines()));
-    }
-
 }
