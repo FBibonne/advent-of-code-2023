@@ -11,7 +11,7 @@ import java.net.URISyntaxException;
 public class AdventOfCode {
 
     public static void main(String[] args) throws IOException, URISyntaxException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        solveDay(7);
+        solveDay(9);
     }
 
 
