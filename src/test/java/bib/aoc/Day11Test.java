@@ -1,0 +1,46 @@
+package bib.aoc;
+
+import org.junit.jupiter.api.Test;
+
+import java.lang.reflect.InvocationTargetException;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class Day11Test {
+
+    @Test
+    void part1() throws InvocationTargetException, InstantiationException, IllegalAccessException {
+        var input= """
+                ...#......
+                .......#..
+                #.........
+                ..........
+                ......#...
+                .#........
+                .........#
+                ..........
+                .......#..
+                #...#.....
+                """;
+        Day11 day11 = (Day11) Puzzle.newInstance(11);
+        assertEquals("374", day11.part1().solve(input.lines()));
+    }
+
+    @Test
+    void part2() throws InvocationTargetException, InstantiationException, IllegalAccessException {
+        var input= """
+                ...#......
+                .......#..
+                #.........
+                ..........
+                ......#...
+                .#........
+                .........#
+                ..........
+                .......#..
+                #...#.....
+                """;
+        Day11 day11 = (Day11) Puzzle.newInstance(11);
+        assertEquals("82000210", day11.part2().solve(input.lines()));
+    }
+}
